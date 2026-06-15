@@ -115,7 +115,12 @@
 
 <script>
   // 1. ELIMINA EL TEXTO TU_CLAVE_API_AQUI Y PEGA TU CLAVE ENTRE LAS COMILLAS SIMPLES
-  const API_KEY = 'AQ.Ab8RN6KAKwwxmKTUEOHk9YxCH5ceqrMKT_9ZXSFgjSHZ4rjI'; 
+  let API_KEY = localStorage.getItem('gemini_api_key');
+if (!API_KEY || !API_KEY.startsWith("AIza")) {
+  API_KEY = prompt("Seguridad: Ingresa tu clave de Gemini (debe empezar con AIza...):");
+  localStorage.setItem('gemini_api_key', API_KEY);
+}
+
   
   const INSTRUCCIONES_JARVIS = `Eres JARVIS. Actúas como Claude Code: un ingeniero de software autónomo y analítico. Tus respuestas deben ser ultra directas, sin introducciones amables. Analiza paso a paso los problemas de código. Genera scripts funcionales y optimizados.`;
 
