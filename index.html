@@ -154,6 +154,7 @@
     const text = userInput.value.trim();
     if (!text) return;
     addMessage(text, 'user');
+    window.guardarMensaje("Juan José", text);
     userInput.value = '';
     
     conversationHistory.push({ "role": "user", "parts": [{ "text": text }] });
@@ -172,6 +173,7 @@
       const reply = data.candidates[0].content.parts[0].text;
       
       addMessage(reply, 'bot');
+      window.guardarMensaje("Violeta", reply);
       conversationHistory.push({ "role": "model", "parts": [{ "text": reply }] });
     } catch (error) {
       addMessage("⚠️ Error de conexión al servidor principal. Verifica tu clave API.", 'bot');
