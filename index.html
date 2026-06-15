@@ -77,6 +77,41 @@
     <div class="integration-item" style="border: 1px solid var(--accent);">Gemini 1.5 Flash (Rápido)</div>
   </div>
 </div>
+  <script type="module">
+  // 1. Importaciones directas de la arquitectura modular de Google
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // 2. Credenciales de acceso de tu base de datos "jarvis-os-backend"
+  const firebaseConfig = {
+    apiKey: "AQ.Ab8RN6KAKwwxmKTUEOHk9YxCH5ceqrMKT_9ZXSFgjSHZ4rjINw",
+    authDomain: "jarvis-os-backend.firebaseapp.com",
+    projectId: "jarvis-os-backend",
+    storageBucket: "jarvis-os-backend.firebasestorage.app",
+    messagingSenderId: "613119230333",
+    appId: "1:613119230333:web:c4b5beb3cc5814b1630c14",
+    measurementId: "G-B71XPBPGVW"
+  };
+
+  // 3. Inicializar el motor de la base de datos
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 4. Función global de guardado para que JARVIS/VIOLETA la utilice
+  window.guardarMensaje = async function(usuario, texto) {
+    try {
+      const docRef = await addDoc(collection(db, "usuarios", "juan_jose", "conversaciones"), {
+        usuario: usuario,
+        mensaje: texto,
+        fecha: serverTimestamp() 
+      });
+      console.log("✅ Memoria guardada con éxito. ID: ", docRef.id);
+    } catch (error) {
+      console.error("🚨 Error crítico al guardar en Firestore: ", error);
+    }
+  }
+</script>
+
 
 <script>
   // 1. ELIMINA EL TEXTO TU_CLAVE_API_AQUI Y PEGA TU CLAVE ENTRE LAS COMILLAS SIMPLES
